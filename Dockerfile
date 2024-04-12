@@ -16,8 +16,8 @@ RUN npm install
 # Copia el resto de los archivos al directorio de trabajo
 COPY . .
 
-# Compila la aplicación
-RUN npm run build -- --prod
+# Compila la aplicación en modo producción utilizando --configuration=production
+RUN npm run build -- --configuration=production
 
 # Establece la imagen base final
 FROM nginx:latest
