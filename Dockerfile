@@ -7,23 +7,26 @@ RUN npm install -g @angular/cli
 # Establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia los archivos de package.json y package-lock.json al directorio de trabajo
-COPY package*.json /app
+# Copia los archivos de package.json y yarn.lock al directorio de trabajo
+COPY package.json yarn.lock /app/
 
-# Instala las dependencias
-RUN npm install
+# Instala las dependencias utilizando Yarn
+RUN yarn install
 
 # Copia el resto de los archivos al directorio de trabajo
-COPY . /app
+COPY . .
 
-# Compila la aplicación en modo producción utilizando --configuration=production
-RUN npm run build -- --configuration=production
+# Compila la aplicación en modo producción utilizando --prod
+RUN ng build --prod
 
 # Establece la imagen base final
 FROM nginx:alpine
 
+# Elimina los archivos de la configuración predeterminada de Nginx
+RUN rm -rf /usr/share/nginx/html/*
+
 # Copia los archivos compilados de la aplicación al directorio de Nginx
-COPY --from=builder /app/dist/ /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expone el puerto 80 para que la aplicación esté disponible
 EXPOSE 80
