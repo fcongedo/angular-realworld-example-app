@@ -1,5 +1,5 @@
 # Usa una imagen base con Node.js preinstalado
-FROM node:latest AS builder
+FROM node:20.9.0 AS builder
 
 # Instala Angular CLI globalmente
 RUN npm install -g @angular/cli
@@ -20,7 +20,7 @@ COPY . /app
 RUN npm run build -- --configuration=production
 
 # Establece la imagen base final
-FROM nginx:latest
+FROM nginx:alpine
 
 # Copia los archivos compilados de la aplicación al directorio de Nginx
 COPY --from=builder /app/dist/ /usr/share/nginx/html
