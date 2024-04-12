@@ -8,7 +8,7 @@ RUN npm install -g @angular/cli
 WORKDIR /app
 
 # Copia los archivos de package.json y yarn.lock al directorio de trabajo
-COPY package.json yarn.lock /app/
+COPY package.json package-lock.json /app/
 
 # Instala las dependencias utilizando Yarn
 RUN yarn install
