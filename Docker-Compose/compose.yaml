@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  angular-app:
+    image: fcongedo/app-angular:2
+    container_name: mi_app_angular
+    ports:
+      - "80:80"
+    restart: always
