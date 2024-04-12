@@ -8,13 +8,13 @@ RUN npm install -g @angular/cli
 WORKDIR /app
 
 # Copia los archivos de package.json y package-lock.json al directorio de trabajo
-COPY package*.json ./
+COPY package*.json /app
 
 # Instala las dependencias
 RUN npm install
 
 # Copia el resto de los archivos al directorio de trabajo
-COPY . .
+COPY . /app
 
 # Compila la aplicación en modo producción utilizando --configuration=production
 RUN npm run build -- --configuration=production
