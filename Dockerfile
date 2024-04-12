@@ -26,7 +26,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copia los archivos compilados de la aplicación al directorio de Nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist/angular-conduit/* /usr/share/nginx/html
 
 # Expone el puerto 80 para que la aplicación esté disponible
 EXPOSE 80
