@@ -16,8 +16,8 @@ RUN yarn install
 # Copia el resto de los archivos al directorio de trabajo
 COPY . .
 
-# Compila la aplicación en modo producción utilizando --prod
-RUN ng build --prod
+# Compila la aplicación en modo producción utilizando --configuration=production
+RUN ng build --configuration=production
 
 # Establece la imagen base final
 FROM nginx:alpine
